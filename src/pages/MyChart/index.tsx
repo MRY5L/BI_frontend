@@ -38,6 +38,10 @@ const MyChartPage: React.FC = () => {
         // 隐藏图表的 title
         if (res.data.records) {
           res.data.records.forEach(data => {
+            if (data.status === 'failed' || data.status === 'resSend') {
+              reSendChatGptUsingPost(data.id ?? -1);
+              return;
+            }
             try {
               data.genChart && JSON.parse(data.genChart)
             } catch (e: any) {
@@ -114,7 +118,7 @@ const MyChartPage: React.FC = () => {
               />
               <>
                 {
-                  item.genChart === '{}' && item.status !=='noSuccess' &&<>
+                  item.genChart === '{}' && item.status !== 'noSuccess' && item.status !== 'lengthMax' && <>
                     <Result
                       status="info"
                       title="AI 生成图表错误,修改中请稍后查看"
@@ -125,9 +129,9 @@ const MyChartPage: React.FC = () => {
                 {
                   item.status === 'wait' && <>
                     <Result
-                      status="warning"
+                      status="info"
                       title="待生成"
-                      subTitle={item.execMessage ?? '当前图表生成队列繁忙，请耐心等候'}
+                      subTitle={item.execMessage ?? '正在准备生成图表，请耐心等候'}
                     />
                   </>
                 }
@@ -164,6 +168,22 @@ const MyChartPage: React.FC = () => {
                       status="error"
                       title="重试次数达上限,请重新尝试或删除"
                       subTitle={'重试次数达上限,请重新尝试或删除' + item.number}
+                    />
+                  </>
+                }
+                {
+                  item.status === 'lengthMax'&& <>
+                    <Result
+                      status="error"
+                      title="数据过多请缩减后重试"
+                    />
+                  </>
+                }
+                {
+                  item.status === 'resSend'&& <>
+                    <Result
+                      status="error"
+                      title="访问ChatGPT时出现了一些问题正在重试中"
                     />
                   </>
                 }

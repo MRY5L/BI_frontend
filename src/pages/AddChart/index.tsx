@@ -36,7 +36,7 @@ const AddChart: React.FC = () => {
       try {
         res.data.genChart && JSON.parse(res.data.genChart)
       } catch (e: any) {
-        message.error("AI 生成错误请重试");
+        message.error(res.message);
         setSubmitting(false);
         return;
       }

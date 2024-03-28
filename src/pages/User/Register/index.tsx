@@ -4,14 +4,14 @@ import {history} from '@umijs/max';
 import {message, Tabs} from 'antd';
 import React, {useState} from 'react';
 import {userRegisterUsingPost} from "@/services/bi/userController";
-import {PLANET_LINK, SYSTEM_LOGO} from "@/constants";
+import {PLANET_LINK} from "@/constants";
 import {Link} from "@@/exports";
 
 const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
 
   // 表单提交
-  const handleSubmit = async (values: API.RegisterParams) => {
+  const handleSubmit = async (values: API.UserRegisterRequest) => {
     const {userPassword, checkPassword} = values;
     // 校验
     if (userPassword !== checkPassword) {
@@ -53,7 +53,7 @@ const Login: React.FC = () => {
             autoLogin: true,
           }}
           onFinish={async (values) => {
-            await handleSubmit(values as API.RegisterParams);
+            await handleSubmit(values as API.UserRegisterRequest);
           }}
         >
           <Tabs activeKey={type} onChange={setType}>

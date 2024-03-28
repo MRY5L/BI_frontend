@@ -15,19 +15,19 @@ const Footer: React.FC = () => {
         {
           key: '智能 BI',
           title: '智能 BI',
-          href: '',
+          href: 'https://github.com/MRY5L?tab=repositories',
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: '',
+          href: 'https://github.com/MRY5L?tab=repositories',
           blankTarget: true,
         },
         {
           key: '智能 BI',
           title: '智能 BI',
-          href: '',
+          href: 'https://github.com/MRY5L?tab=repositories',
           blankTarget: true,
         },
       ]}

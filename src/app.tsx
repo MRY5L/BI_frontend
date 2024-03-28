@@ -1,10 +1,9 @@
 import Footer from '@/components/Footer';
 import {Question} from '@/components/RightContent';
 import {getLoginUserUsingGET} from '@/services/yubi/userController';
-import {LinkOutlined} from '@ant-design/icons';
 import {SettingDrawer} from '@ant-design/pro-components';
 import type {RunTimeLayoutConfig} from '@umijs/max';
-import {history, Link} from '@umijs/max';
+import {history} from '@umijs/max';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
 import {errorConfig} from './requestConfig';
 
@@ -41,6 +40,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => {
   return {
+    logo: 'http://45.76.169.234/pdx.jpg',
     actionsRender: () => [<Question key="doc"/>],
     avatarProps: {
       src: initialState?.currentUser?.userAvatar === '' ? '无名' : initialState?.currentUser?.userAvatar,
@@ -113,7 +113,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const request = {
-  baseURL: 'http://localhost:8101',
+  baseURL: 'http://45.76.169.234:8101',
   withCredentials: true,
   ...errorConfig,
 };
